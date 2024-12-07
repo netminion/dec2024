@@ -1,0 +1,12 @@
+interface Vlan1
+ description KEEPING_ADMIN_SHUT_Using_Script
+ no ip address
+ shutdown
+
+spanning-tree uplinkfast
+spanning-tree backbonefast
+spanning-tree portfast edge default
+spanning-tree loopguard default
+
+end
+wr

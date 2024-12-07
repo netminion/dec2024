@@ -1,0 +1,6 @@
+access-list 199 permit icmp any any
+access-list 199 permit tcp any any eq tacacs
+access-list 199 permit tcp any any eq ftp
+access-list 199 permit tcp any any eq telnet
+access-list 199 permit tcp any any eq smtp
+access-list 199 permit tcp any any eq syslog

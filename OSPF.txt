@@ -1,0 +1,3 @@
+router ospf 10
+ passive-interface Loopback0
+ router-id 1.1.1.1

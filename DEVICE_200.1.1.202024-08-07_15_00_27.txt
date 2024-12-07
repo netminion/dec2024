@@ -1,0 +1,137 @@
+
+Switch2#terminal len 0
+Switch2#show run
+Building configuration...
+
+Current configuration : 1841 bytes
+!
+! Last configuration change at 14:44:11 UTC Wed Aug 7 2024 by cisco
+!
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname Switch2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+username cisco privilege 15 secret 5 $1$gBpI$O5CqrCut819AsyVdfE0KN0
+aaa new-model
+!
+!
+aaa authorization exec default local 
+!
+!
+!
+!
+!
+!
+aaa session-id common
+!
+!
+!
+!
+!
+no ipv6 cef
+!
+!
+!
+!
+no ip icmp rate-limit unreachable
+!
+no ip domain-lookup
+ip domain-name netminion.net
+!
+!
+ip cef
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree loopguard default
+spanning-tree portfast edge default
+spanning-tree extend system-id
+spanning-tree uplinkfast
+spanning-tree backbonefast
+!
+!
+! 
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Ethernet0/0
+ no switchport
+ ip address 200.1.1.20 255.255.255.0
+!
+interface Ethernet0/1
+!
+interface Ethernet0/2
+!
+interface Ethernet0/3
+!
+interface Vlan1
+ description KEEPING_ADMIN_SHUT_Using_Script
+ no ip address
+ shutdown
+!
+ip forward-protocol nd
+!
+ip tcp synwait-time 5
+no ip http server
+ip ssh version 2
+ip ssh server algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip ssh client algorithm encryption aes128-ctr aes192-ctr aes256-ctr
+ip scp server enable
+!
+ip route 0.0.0.0 0.0.0.0 200.1.1.1
+!
+!
+ip access-list standard TEST
+ deny   172.16.20.10
+ permit any
+!
+access-list 199 permit icmp any any
+access-list 199 permit tcp any any eq tacacs
+access-list 199 permit tcp any any eq ftp
+access-list 199 permit tcp any any eq telnet
+access-list 199 permit tcp any any eq smtp
+access-list 199 permit tcp any any eq cmd
+!
+!
+!
+!
+!
+control-plane
+!
+!
+line con 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line aux 0
+ exec-timeout 0 0
+ privilege level 15
+ logging synchronous
+line vty 0 4
+ access-class TEST in
+ transport input all
+!
+!
+!
+end
+
+Switch2#

@@ -1,0 +1,15 @@
+import json
+from napalm import get_network_driver
+driver = get_network_driver('ios')
+Var_SW = driver('200.1.1.10', 'cisco', 'cisco')
+Var_SW.open()
+ios_output = Var_SW.get_facts()
+print("\n THIS IS GET FACTS OUTPUT \n")
+print (json.dumps(ios_output, indent=4))
+ios_output = Var_SW.get_interfaces()
+print("\n THIS IS GET INTERFACE OUTPUT\n")
+print (json.dumps(ios_output, sort_keys=True, indent=4))
+ios_output = Var_SW.get_interfaces_counters()
+print("\n THIS IS INTERFACE COUTER OUTPUT\n")
+print (json.dumps(ios_output, sort_keys=True, indent=4))
+Var_SW.close()
